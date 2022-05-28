@@ -21,4 +21,14 @@
     <select id="findById" parameterType="long" resultType="board">
         select * from board_table where b_id=#{b_id}
     </select>
+    <update id="update" parameterType="board">
+        update board_table set boardTitle =#{boardTitle},boardContents=#{boardContents} where b_id=#{b_id}
+    </update>
+    <delete id="delete" parameterType="Long">
+        delete from board_table where b_id=#{b_id}
+    </delete>
+    <select id="search" parameterType="java.util.HashMap" resultType="board">
+        select * from board_table where ${type} like concat('%',#{q},'%')
+        order by b_id desc;
+    </select>
 </mapper>

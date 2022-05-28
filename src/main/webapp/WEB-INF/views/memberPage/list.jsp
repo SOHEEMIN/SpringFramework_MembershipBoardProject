@@ -33,6 +33,11 @@
                 <td>${member.memberEmail}</td>
                 <td>${member.memberMobile}</td>
                 <td><img src="${pageContext.request.contextPath}/upload/${member.memberProfileName}" alt="" height="30" width="30"></td>
+                <c:if test = "${sessionScope.loginMemberId eq 'admin'}">
+                <td>
+                    <button class="btn btn-primary" onclick="boardDelete()">회원탈퇴</button>
+                </td>
+                </c:if>
 
             </tr>
         </c:forEach>
@@ -40,13 +45,9 @@
     <div></div>
 </div>
 </body>
-<%--<script>--%>
-<%--    const detailByAjax = (m_id) => {--%>
-<%--        const detail = document.getElementById(m_id);--%>
-<%--        $.ajax({--%>
-<%--            type:"get"--%>
-<%--        });--%>
-<%--      --%>
-<%--    }--%>
-<%--</script>--%>
+<script>
+    const boardDelete = () => {
+        location.href="/board/deleteMember?m_id=${member.m_id}";
+    }
+</script>
 </html>

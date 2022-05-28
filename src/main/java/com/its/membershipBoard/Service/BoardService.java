@@ -34,7 +34,7 @@ public class BoardService {
         return boardRepository.findAll(id);
     }
 
-    private static final int PAGE_LIMIT = 3;
+    private static final int PAGE_LIMIT = 5;
     private static final int BLOCK_LIMIT = 3;
 
     public List<BoardDTO> pagingList(int page) {
@@ -64,5 +64,21 @@ public class BoardService {
 
     public BoardDTO findById(long id) {
         return boardRepository.findById(id);
+    }
+
+    public void update(BoardDTO boardDTO) {
+        boardRepository.update(boardDTO);
+    }
+
+    public void delete(long b_id) {
+        boardRepository.delete(b_id);
+    }
+
+    public List<BoardDTO> search(String searchType, String q) {
+        Map<String, String> searchParam = new HashMap<>();
+        searchParam.put("type", searchType);
+        searchParam.put("q", q);
+        List<BoardDTO> searchList = boardRepository.search(searchParam);
+        return searchList;
     }
 }

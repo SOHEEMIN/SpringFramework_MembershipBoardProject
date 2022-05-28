@@ -64,5 +64,9 @@ public class MemberController {
         session.invalidate();
         return "index";
     }
+    @GetMapping("/admin")
+    public String admin(){
+        return "memberPage/admin";
+    }
 
 }

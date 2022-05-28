@@ -18,6 +18,7 @@
     <a href="/board/saveFile">글작성</a>
     <a href="/board/paging">글목록</a>
     <a href="/member/logout">로그아웃</a>
+    <a href="/member/admin">관리자버전</a>
     로그인 회원 정보: ${loginMember}
     세션에 담은 memberId: ${sessionScope.loginMemberId}
     세션에 담은 m_id:${sessionScope.loginId}

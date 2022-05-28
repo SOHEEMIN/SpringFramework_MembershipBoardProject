@@ -16,6 +16,16 @@
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
+<div class="container mt-3">
+    <form action="/board/search" method="get">
+        <select name="searchType">
+            <option value="boardTitle">제목</option>
+            <option value="memberId">작성자</option>
+        </select>
+        <input type="text" name="q" placeholder="검색">
+        <input type="submit" value="검색">
+    </form>
+</div>
 <div class="container">
     <table class="table">
         <tr>
@@ -81,7 +91,6 @@
             </c:otherwise>
         </c:choose>
     </ul>
-    <p2>되는거니</p2>
 </div>
 </body>
 </html>
