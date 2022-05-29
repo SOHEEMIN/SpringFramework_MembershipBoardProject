@@ -14,6 +14,7 @@ public class BoardRepository {
     private SqlSessionTemplate sql;
 
     public void saveFile(BoardDTO boardDTO) {
+        System.out.println("boardDTO = " + boardDTO);
         sql.insert("Board.saveFile", boardDTO);
     }
 

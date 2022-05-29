@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
 <div class="container">
-    <h2 class="display-4 fw-normal">save.jsp</h2>
+    <h2 class="display-4 fw-normal">save.jsp</h2>z
     <div class="py-5 text-center">
         <h2>상세조회</h2><br>
         글번호: ${board.b_id}<br>
@@ -23,7 +23,6 @@
         작성일: ${board.boardCreatedDate}<br>
         <img src="${pageContext.request.contextPath}/upload/${board.boardFileName}" alt="" height="100" width="100">
         <button class="btn btn-primary" onclick="paging()">글 목록</button>
-        <button id="comment-write-btn" class="btn btn-danger">댓글작성</button>
         <c:if test = "${sessionScope.loginMemberId eq board.memberId}">
             <button class="btn btn-primary" onclick="boardUpdate()">글 수정</button>
             <button class="btn btn-primary" onclick="boardDelete()">글 삭제</button>
@@ -31,6 +30,14 @@
         <c:if test = "${sessionScope.loginMemberId eq 'admin'}">
             <button class="btn btn-primary" onclick="boardDelete()">글 삭제</button>
         </c:if>
+        <div class="container">
+            <div id="commit-write" class="input-group- mb-3">
+                <input type="text" id="memberId" class="form-control" value="${sessionScope.loginMemberId}" readonly>
+                <input type="text" id="commentContents" class="form-control" placeholder="내용">
+                <button id="comment-write-btn" class="btn btn-danger">댓글작성</button>
+            </div>
+        </div>
+
         <div id="comment-list">
             <table class="table">
                 <tr>
@@ -51,6 +58,7 @@
         </div>
     </div>
 </div>
+
 </body>
 <script>
     $("#comment-write-btn").click(function () {
@@ -58,21 +66,21 @@
         //세개의 값을 보내는 코드를 작성하시오
         const memberId = document.getElementById("memberId").value;
         const commentContents = $("#commentContents").val();
-        const boardId = '${board.b_id}';
-        console.log(memberId, commentContents, boardId)
+        const b_id = '${board.b_id}';
+        console.log(memberId, commentContents, b_id)
         $.ajax({
             type: "post",
             url: "/comment/save",
             data: {
                 "memberId": memberId,
                 "commentContents": commentContents,
-                "boardId": boardId
+                "b_id": b_id
             },
             dataType: "json",
             success: function (result) {
                 console.log(result);
                 let output = "<table class='table'>";
-                output += "<tr>댓글번호</th>";
+                output += "<tr><th>댓글번호</th>";
                 output += "<th>작성자</th>";
                 output += "<th>내용</th>";
                 output += "<th>작성시간</th></tr>";
@@ -90,7 +98,7 @@
                 document.getElementById('commentContents').value='';
             },
             error: function () {
-                alert("어디가 틀렸을까");
+                alert("오류");
             }
         });
     });

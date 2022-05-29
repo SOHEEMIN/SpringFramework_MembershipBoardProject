@@ -33,21 +33,10 @@
                 <td>${member.memberEmail}</td>
                 <td>${member.memberMobile}</td>
                 <td><img src="${pageContext.request.contextPath}/upload/${member.memberProfileName}" alt="" height="30" width="30"></td>
-                <c:if test = "${sessionScope.loginMemberId eq 'admin'}">
-                <td>
-                    <button class="btn btn-primary" onclick="boardDelete()">회원탈퇴</button>
-                </td>
-                </c:if>
-
+                <td><a href="/member/delete?m_id=${member.m_id}">삭제</a> </td>
             </tr>
         </c:forEach>
     </table>
-    <div></div>
 </div>
 </body>
-<script>
-    const boardDelete = () => {
-        location.href="/board/deleteMember?m_id=${member.m_id}";
-    }
-</script>
 </html>

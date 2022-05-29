@@ -44,4 +44,8 @@ public class MemberService {
         MemberDTO loginMember = memberRepository.login(memberDTO);
         return loginMember;
     }
+
+    public void delete(long m_id) {
+        memberRepository.delete(m_id);
+    }
 }

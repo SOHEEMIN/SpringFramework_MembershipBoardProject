@@ -9,8 +9,8 @@
         update board_table set boardHits = boardHits+1 where b_id = #{b_id}
     </update>
     <insert id="saveFile" parameterType="board">
-        insert into board_table(boardTitle, memberId, boardContents, boardHits, boardFileName)
-        values(#{boardTitle}, #{memberId}, #{boardContents}, #{boardHits}, #{boardFileName})
+        insert into board_table(boardTitle, memberId, boardContents, boardFileName)
+        values(#{boardTitle}, #{memberId}, #{boardContents}, #{boardFileName})
     </insert>
     <select id="pagingList" parameterType="java.util.HashMap" resultType="board">
         select * from board_table order by b_id desc limit #{start}, #{limit}

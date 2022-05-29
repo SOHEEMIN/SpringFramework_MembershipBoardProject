@@ -17,4 +17,7 @@
     <select id="login" parameterType="member" resultType="member">
         select * from member_table where memberId = #{memberId} and memberPassword = #{memberPassword}
     </select>
+    <delete id="delete" parameterType="Long">
+        delete from member_table where m_id = #{m_id}
+    </delete>
 </mapper>

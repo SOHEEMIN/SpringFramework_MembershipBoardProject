@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="membershipBoardProject" />
+        <module name="membershipBoardProject - 복사본" />
       </profile>
     </annotationProcessing>
   </component>
