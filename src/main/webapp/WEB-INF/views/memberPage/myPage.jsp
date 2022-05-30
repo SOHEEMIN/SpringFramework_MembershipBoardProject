@@ -1,21 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/editPost.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/css/myPage.css">
     <meta charset="UTF-8">
     <meta name="description" content="HTML Study">
     <meta name="keywords" content="HTML,CSS,XML,JavaScript">
     <meta name="author" content="Bruce">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOHEE's Main</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>My page</title>
     <style>
-        td{
-            padding: 10px;
-            font-size: small;
+        #changeButton{
+            top: 85px;
+            background-color: rgb(200, 206, 242);
+            border-radius:3px;
+            width: 100px;
+            font-size: x-small;
+            height: 40px;
+            font-family: 'Press Start 2P', cursive;
+
+        }
+        #changeButton:hover{
+            background-color: rgb(147, 161, 238);
         }
     </style>
 </head>
@@ -28,30 +38,42 @@
     </svg>
     Welcome to<br>Sohee's Retro Community!
 </header>
-<form action="/board/update" method="post" name="updateForm">
+<main>
     <table>
-        <caption>Edit</caption>
+        <caption>My page</caption>
         <tr>
-            <td>Board Number</td>
-            <td><input type="text" name="b_id" value="${boardUpdate.b_id}" class="form-control" readonly></td>
+            <td><input type="hidden" name="m_id" value="${memberDetail.m_id}" readonly></td>
         </tr>
         <tr>
-            <td>Writer</td>
-            <td><input type="text" name="${sessionScope.loginMemberId}" value="${sessionScope.loginMemberId}"
-                       class="form-control" readonly></td>
+            <td>ID</td>
+            <td><input type="text" value="${memberDetail.memberId}" readonly></td>
         </tr>
         <tr>
-            <td>Title</td>
-            <td><input type="text" name="boardTitle" id="title" value="${boardUpdate.boardTitle}" style="width: 336px" class="form-control"></td>
+            <td>Password</td>
+            <td><input type="password" placeholder="****" readonly></td>
         </tr>
         <tr>
-            <td>Contents</td>
-            <td><textarea id="contents" name="boardContents" cols=36" rows="10">${boardUpdate.boardContents}</textarea></td>
+            <td>Name</td>
+            <td><input type="text" id="name" value="${memberDetail.memberName}" style="width: 336px" readonly></td>
         </tr>
         <tr>
-            <td><input type="button" class="btn btn-danger" id="changeButton" onclick="updateForm.submit()" value="Edit"></td>
+            <td>E-mail</td>
+            <td><input type="text" value="${memberDetail.memberEmail}" readonly></td>
         </tr>
-        </table>
-</form>
+        <tr>
+            <td>Mobile</td>
+            <td><input type="text" value="${memberDetail.memberMobile}" readonly></td>
+        </tr>
+        <tr>
+            <td>Profile</td>
+            <td><img src="${pageContext.request.contextPath}/upload/${memberDetail.memberProfileName}" alt=""
+                     height="100"
+                     width="100"></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="changeButton" value="edit" onclick="location.href='/member/update'"></td>
+        </tr>
+    </table>
+</main>
 </body>
 </html>

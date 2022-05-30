@@ -1,8 +1,10 @@
 package com.its.membershipBoard.Controller;
 
 import com.its.membershipBoard.DTO.BoardDTO;
+import com.its.membershipBoard.DTO.CommentDTO;
 import com.its.membershipBoard.DTO.PageDTO;
 import com.its.membershipBoard.Service.BoardService;
+import com.its.membershipBoard.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import java.util.List;
 public class BoardController {
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/findAll")
     public String findAll(Model model) {
@@ -49,6 +53,8 @@ public class BoardController {
                            @RequestParam(value = "page", required = false,defaultValue = "1")int page){
         model.addAttribute("board", boardService.findById(b_id));
         model.addAttribute("Page", page);
+        List<CommentDTO> commentDTOList = commentService.findAll(b_id);
+        model.addAttribute("commentList", commentDTOList);
         return "/boardPage/detail";
     }
     @GetMapping("/update")

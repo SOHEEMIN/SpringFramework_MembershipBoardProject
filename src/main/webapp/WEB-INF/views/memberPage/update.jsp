@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -7,14 +6,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/admin.css">
+    <link rel="stylesheet" href="/resources/css/update.css">
     <meta charset="UTF-8">
     <meta name="description" content="HTML Study">
     <meta name="keywords" content="HTML,CSS,XML,JavaScript">
     <meta name="author" content="Bruce">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>List</title>
+    <title>Update</title>
+    <style>
+        #changeButton{
+            top: 85px;
+            background-color: rgb(200, 206, 242);
+            border-radius:3px;
+            width: 100px;
+            font-size: x-small;
+            height: 40px;
+            font-family: 'Press Start 2P', cursive;
+
+        }
+        #changeButton:hover{
+            background-color: rgb(147, 161, 238);
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -26,32 +40,56 @@
     Welcome to<br>Sohee's Retro Community!
 </header>
 <main>
-    <table>
-        <caption>Member List</caption>
-        <tr>
-            <th>no</th>
-            <th>ID</th>
-            <th>PW</th>
-            <th>NAME</th>
-            <th>E-MAIL</th>
-            <th>MOBILE</th>
-            <th>PROFILE</th>
-            <th>DELETE</th>
-        </tr>
-        <c:forEach items="${memberList}" var="member">
+    <form action="/member/update" method="post" name="updateSubmit" enctype="multipart/form-data">
+        <table>
+            <caption>Update</caption>
             <tr>
-                <td>${member.m_id}</td>
-                <td>${member.memberId}</td>
-                <td>${member.memberPassword}</td>
-                <td>${member.memberName}</td>
-                <td>${member.memberEmail}</td>
-                <td>${member.memberMobile}</td>
-                <td><img src="${pageContext.request.contextPath}/upload/${member.memberProfileName}" alt="" height="30"
-                         width="30"></td>
-                <td><a href="/member/delete?m_id=${member.m_id}">Delete</a></td>
+                <td><input type="hidden" name="m_id" value="${memberDetail.m_id}" readonly></td>
             </tr>
-        </c:forEach>
-    </table>
+            <tr>
+                <td>ID</td>
+                <td><input type="text" name="memberId" value="${memberDetail.memberId}" readonly></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="memberPw" id="memberPw"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" id="name" name="memberName" value="${memberDetail.memberName}" style="width: 336px"></td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td><input type="text" name="memberEmail" value="${memberDetail.memberEmail}"></td>
+            </tr>
+            <tr>
+                <td>Mobile</td>
+                <td><input type="text" name="memberMobile" value="${memberDetail.memberMobile}"></td>
+            </tr>
+            <tr>
+                <td>Profile</td>
+                <td><img src="${pageContext.request.contextPath}/upload/${memberDetail.memberProfileName}" alt=""
+                         height="100"
+                         width="100"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="changeButton" onclick="update()" value="Edit"></td>
+            </tr>
+        </table>
+    </form>
 </main>
 </body>
+<script>
+    function update() {
+        let pw = document.getElementById("memberPw").value;
+        let pwDB =
+        ${memberDetail.memberPassword}
+        if (pw == pwDB) {
+            updateSubmit.submit();
+            alert("수정 완료!")
+        } else {
+            alert("비밀번호를 확인해주세요");
+        }
+    }
+</script>
 </html>

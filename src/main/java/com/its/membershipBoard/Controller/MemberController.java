@@ -39,7 +39,7 @@ public class MemberController {
         long m_id = 0;
         List<MemberDTO> memberDTOList = memberService.findAll(m_id);
         model.addAttribute("memberList", memberDTOList);
-        return "memberPage/list";
+        return "/memberPage/admin";
     }
     @GetMapping("/login")
     public String loginForm() {
@@ -53,7 +53,7 @@ public class MemberController {
             model.addAttribute("loginMember", loginMember);
             session.setAttribute("loginMemberId", loginMember.getMemberId());
             session.setAttribute("loginId", loginMember.getM_id());
-            return "redirect:/board/paging";
+            return "/index";
 
         }else {
             return "/memberPage/login";
@@ -73,6 +73,30 @@ public class MemberController {
     public String delete (@RequestParam("m_id")long m_id){
         memberService.delete(m_id);
         return "redirect:/board/findAll";
+    }
+    @GetMapping("/detail")
+    public String findById(HttpSession session, Model model){
+        Long detailId = (Long) session.getAttribute("loginId");
+        MemberDTO memberDTO = memberService.findById(detailId);
+        model.addAttribute("memberDetail",memberDTO);
+        return "/memberPage/myPage";
+    }
+
+    @GetMapping("/update")
+    public String updateForm(HttpSession session, Model model){
+        Long updateId = (Long) session.getAttribute("loginId");
+        MemberDTO memberDTO = memberService.findById(updateId);
+        model.addAttribute("memberDetail",memberDTO);
+        return "/memberPage/update";
+    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO) {
+        boolean result = memberService.update(memberDTO);
+        if(result){
+            return "redirect:/member/detail?m_id="+memberDTO.getM_id();
+        }else {
+            return "index";
+        }
     }
 
 }

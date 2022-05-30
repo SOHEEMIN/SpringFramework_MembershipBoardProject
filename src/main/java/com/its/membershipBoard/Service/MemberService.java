@@ -48,4 +48,17 @@ public class MemberService {
     public void delete(long m_id) {
         memberRepository.delete(m_id);
     }
+
+    public MemberDTO findById(Long m_id) {
+        MemberDTO memberDTO = memberRepository.findById(m_id);
+        return memberDTO;
+    }
+    public boolean update(MemberDTO memberDTO) {
+        int result = memberRepository.update(memberDTO);
+        if(result >0 ){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

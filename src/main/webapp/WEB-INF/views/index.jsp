@@ -13,6 +13,9 @@
     <meta name="author" content="Bruce">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOHEE's Main</title>
+<%--    <style>--%>
+<%--        img{width:100%; height:100%; background:url('/resources/img/sky.jpg') no-repeat center center / contain; margin:0;}--%>
+<%--    </style>--%>
 </head>
 <body>
 <header>
@@ -26,19 +29,34 @@
 <table>
     <caption>Main</caption>
     <tr id="firstTr">
-        <td><input type="button" id="WriteButton1" value="Join us" onclick="location.href='/member/saveFile'"></td>
-        <td><input type="button" id="WriteButton2" value="Login" onclick="location.href='/member/login'"></td>
+        <c:if test="${sessionScope.loginMemberId == null}">
+            <td><input type="button" id="WriteButton1" value="Join us" onclick="location.href='/member/saveFile'"></td>
+            <td><input type="button" id="WriteButton2" value="Login" onclick="location.href='/member/login'"></td>
+        </c:if>
         <td><input type="button" id="WriteButton3" value="Write" onclick="location.href='/board/saveFile'"></td>
         <td><input type="button" id="WriteButton4" value="List" onclick="location.href='/board/paging'"></td>
-        <td><input type="button" id="WriteButton5" value="Logout" onclick="location.href='/member/logout'"></td>
-        <c:if test="${sessionScope.loginMemberId == 'admin'}">
-        <td><input type="button" id="WriteButton6" value="Admin" onclick="location.href='/member/admin'"></td>
+        <c:if test="${sessionScope.loginMemberId != null}">
+            <td><input type="button" id="WriteButton5" value="Logout" onclick=logout()></td>
+            <td><input type="button" id="WriteButton7" value="my page" onclick="location.href='/member/update'"></td>
         </c:if>
+        <c:if test="${sessionScope.loginMemberId == 'admin'}">
+            <td><input type="button" id="WriteButton6" value="Admin" onclick="location.href='/member/findAll'"></td>
+        </c:if>
+
     </tr>
 </table>
 <%--<img src="/resources/img/sky.jpg" alt="sky">--%>
+
 <c:if test="${sessionScope.loginMemberId != null}">
     <h5>nice to meet you again ${sessionScope.loginMemberId}! </h5>
 </c:if>
 </body>
+<script>
+    function logout() {
+        answer = confirm("로그아웃 하시겠습니까?");
+        if (answer == true) {
+            location.href = '/member/logout';
+        }
+    }
+</script>
 </html>
