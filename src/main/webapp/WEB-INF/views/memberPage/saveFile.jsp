@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <td><p>Password</p></td>
-                <td><input type="text" name="memberPassword" placeholder="비밀번호" onblur="pwCheck()" id="memberPassword">
+                <td><input type="password" name="memberPassword" placeholder="비밀번호" onblur="pwCheck()" id="memberPassword">
                 </td>
             </tr>
             <tr>

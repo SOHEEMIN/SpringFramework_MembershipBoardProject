@@ -42,7 +42,7 @@ public class BoardController {
     }
     @GetMapping("/paging")
     public String page(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model){
-        List<BoardDTO>boardList=boardService.pagingList(page);
+        List<BoardDTO> boardList=boardService.pagingList(page);
         PageDTO paging = boardService.paging(page);
         model.addAttribute("boardList", boardList);
         model.addAttribute("paging", paging);
@@ -61,7 +61,7 @@ public class BoardController {
     public String updateForm(@RequestParam("b_id") long b_id, Model model){
         BoardDTO boardDTO = boardService.findById((b_id));
         model.addAttribute("boardUpdate", boardDTO);
-        return "/boardPage/update";
+            return "/boardPage/update";
     }
 
     @PostMapping("/update")
@@ -72,7 +72,7 @@ public class BoardController {
     @GetMapping("/delete")
     public String deleteForm(@RequestParam("b_id")long b_id){
         boardService.delete(b_id);
-        return "/boardPage/pagingList";
+        return "redirect:/board/paging";
     }
     @GetMapping("/search")
     public String search(@RequestParam("searchType") String searchType,@RequestParam ("q") String q, Model model){

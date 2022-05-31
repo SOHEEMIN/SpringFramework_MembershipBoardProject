@@ -25,7 +25,7 @@ public class MemberController {
     @PostMapping("/saveFile")
     public String saveFile(@ModelAttribute MemberDTO memberDTO) throws IOException {
         memberService.saveFile(memberDTO);
-        return "index";
+        return "memberPage/login";
     }
 
     @PostMapping("/duplicate-check")
