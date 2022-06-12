@@ -55,9 +55,6 @@
 
 </div>
 
-<%--<img src="/resources/img/sky.jpg" alt="sky">--%>
-
-
 </body>
 <script>
     function logout() {
